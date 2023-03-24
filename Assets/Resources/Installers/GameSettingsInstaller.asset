@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e108988f08b4101b3a5c59704938961, type: 3}
+  m_Name: GameSettingsInstaller
+  m_EditorClassIdentifier: 
+  kozelSettings:
+    Color: 1
+    Settings:
+      kozelScale: 0.9
+  GameInstaller:
+    KozelPrefab: {fileID: 8415796259097214778, guid: 763e6774af1154b3796c64ce804929b0, type: 3}
+  AudioSettings:
+    _meeSound: {fileID: 8300000, guid: 867cbd41a82c743a5bc2a607662677ff, type: 3}
