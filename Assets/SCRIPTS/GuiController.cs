@@ -14,6 +14,7 @@ namespace Kozel
         // было: [SerializeField] private Button _kozelBTN;
 
         
+        // возможно, это файл пока не нужен раз в UI больше ничего нет
         private void SetText(int _showMeeCount)
         {
             _textfield.text = _showMeeCount.ToString();

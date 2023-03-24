@@ -9,103 +9,104 @@ using Zenject;
 
 namespace Kozel
 {
-    public class CountField : IInitializable, IDisposable //ITickable,
+    public class CountField : MonoBehaviour // IInitializable, IDisposable - не катит
 
     {
-    // ---------------- это выносится в Game Settings Inslaller -----------------
-    // ---------- но выдает ошибку "ZenjectException: Unable to resolve
-    // 'CountField.Settings' while building object with type 'CountField'. Object graph: CountField
+        // ---------------- это выносится в Game Settings Inslaller -----------------
+        // ---------- но выдает ошибку "ZenjectException: Unable to resolve
+        // 'CountField.Settings' while building object with type 'CountField'. Object graph: CountField
 
-    public enum ColorEnum
-    {
-        None,
-        Pink,
-        Blue,
-        Green,
-        Gray
-    }
-
-    public ColorEnum currentColor;
-    // --------------------------------------
-
-
-    private TMP_Text _countfield;
-    private GameManager _gameManager;
-    private SignalBus _signalBus;
-
-    // -------- для  inject -----------------
-    private Settings _settings; 
-
-    [Inject]
-    public void Construct(  GameManager gameManager, SignalBus signalBus, Settings settings) //SignalBus signalBus, Settings settings
-    {
-        _settings = settings;
-        _gameManager = gameManager;
-        _signalBus = signalBus;
-    }
-
-
-    //####################
-    // написать обновление текста по сигналу
-
-    private void Initialize()
-    {
-        
-        _signalBus.Subscribe<BtnPressedSignal>(CountUpdate);
-
-        // ДА, ОНО РАБОТАЕТ
-        // раскомментить для теста что цвет текста меняется:
-        // _countfield.color = Color.magenta;
-
-        SetTxtFieldColor();
-    }
-
-    
-
-    private void CountUpdate()
-    {
-        _countfield = FindObjectOfType<TMP_Text>();
-        _countfield.text = _gameManager.meeCount.ToString();
-    }
-
-
-    private void SetTxtFieldColor()
-    {
-        // ############ ???? #############################
-        // настройки в Game Settings Inslaller 
-        // УВЫ, перезаписываются настройками в текстовом поле которое на сцене :(
-
-
-        switch (currentColor)
+        public enum ColorEnum
         {
-            case ColorEnum.Pink:
-                _countfield.color = Color.magenta;
-                break;
-            case ColorEnum.Blue:
-                _countfield.color = Color.blue;
-                break;
-            case ColorEnum.Green:
-                _countfield.color = Color.green;
-                break;
-            case ColorEnum.Gray:
-                _countfield.color = Color.gray;
-                break;
+            None,
+            Pink,
+            Blue,
+            Green,
+            Gray
         }
-    }
+
+        public ColorEnum currentColor;
+        // --------------------------------------
 
 
-    public void Dispose()
-    {
-        _signalBus.Unsubscribe<BtnPressedSignal>(CountUpdate);
-    }
+        private TMP_Text _countfield;
+        private GameManager _gameManager;
+        private SignalBus _signalBus;
 
+        // -------- для  inject -----------------
+            private Settings _settings; 
+
+            [Inject]
+            public void Construct(  GameManager gameManager, SignalBus signalBus, Settings settings) //SignalBus signalBus, Settings settings
+            {
+                _settings = settings;
+                _gameManager = gameManager;
+                _signalBus = signalBus;
+            }
 
 
     
-     [Serializable]
-     public class Settings
-     {
-         private ColorEnum currentColor;
-     }
+
+        private void Awake()
+        {
+            
+            _signalBus.Subscribe<BtnPressedSignal>(CountUpdate);
+
+            // ДА, ОНО РАБОТАЕТ
+            // раскомментить для теста что цвет текста меняется:
+            // _countfield.color = Color.magenta;
+
+            SetTxtFieldColor();
+        }
+
+    
+
+        private void CountUpdate()
+        {
+            _countfield = FindObjectOfType<TMP_Text>();
+            _countfield.text = _gameManager.meeCount.ToString();
+        }
+
+
+        private void SetTxtFieldColor()
+        {
+            // ############ ???? #############################
+            // настройки в Game Settings Inslaller 
+            // УВЫ, перезаписываются настройками в текстовом поле которое на сцене :(
+
+
+            switch (currentColor)
+            {
+                case ColorEnum.Pink:
+                    _countfield.color = Color.magenta;
+                    break;
+                case ColorEnum.Blue:
+                    _countfield.color = Color.blue;
+                    break;
+                case ColorEnum.Green:
+                    _countfield.color = Color.green;
+                    break;
+                case ColorEnum.Gray:
+                    _countfield.color = Color.gray;
+                    break;
+            }
+        }
+
+
+        public void Dispose()
+        {
+            _signalBus.Unsubscribe<BtnPressedSignal>(CountUpdate);
+        }
+
+
+
+        
+         [Serializable]
+         public class Settings
+         {
+             private ColorEnum currentColor;
+         }
+     
+     
     }
 }

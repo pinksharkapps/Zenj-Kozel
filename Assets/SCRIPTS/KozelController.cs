@@ -20,7 +20,7 @@ namespace Kozel
        
         
         // было: public KozelController( Settings settings, SignalBus signalBus)
-        // но нельзя наследоваться от монобеха и иметь конструктор.
+        // но нельзя наследоваться от монобеха и иметь конструктор?
         [Inject]
         public void Construct( Settings settings)//SignalBus signalBus
         {
@@ -35,7 +35,7 @@ namespace Kozel
         {
             setMee(false);
 
-            // раскомментить для проверки, что скейл вообще работает:
+            // РАБОТАЕТ - раскомментить для проверки, что скейл вообще работает:
             // transform.localScale = transform.localScale * 0.5f;
             
             scaleKozel();

@@ -12,7 +12,7 @@ namespace Kozel
         private readonly SignalBus _signalBus;
         private readonly Settings _settings;
         private readonly AudioSource _myAudSource;
-        // добавить инкапсуляцию на нижний !!!!!!!!!!!
+        
         
         // стандартный конструктор для сигналбас
         public AudioManager(
@@ -62,8 +62,7 @@ namespace Kozel
         {
             public AudioClip _meeSound;
             
-            // вот эту хрень надо как-то использовать но надо понять как
-            // и она пока не отображеется
+            
         }
     }
 }

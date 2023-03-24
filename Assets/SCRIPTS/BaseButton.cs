@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+// скопировано из нашего проекта!
 // благодаря этому коду больше НИКОГДА не пишем код для кнопок 
 // кнопки просто создаем как RestartButtonSignal - RestartButton
 
